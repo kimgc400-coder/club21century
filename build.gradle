@@ -66,9 +66,13 @@ tasks.named('test') {
     systemProperty 'spring.profiles.active', 'test'
 
     testLogging {
-        events 'failed'
+        events 'failed' //이것또한 실패한 로그만 남기라는 말이다.
         exceptionFormat = 'full'   // 전체 스택트레이스와 메시지를 콘솔에 출력
         showCauses = true
         showStackTraces = true
+        //showStandardStreams = true   // ← 마이바티서의 sql로그는 예외가 아니라 일반로그이다.
+                                       // 애플리케이션의 표준 출력으로 나가는데 gradle이 기본적으로 그걸 가로채서 숨긴다.
+                                       // 평소에는 주석처리하고 필요한 경우에만 켜서 확인한다.
+
     }
 }
