@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    # 로컬 MySQL 8 에 root 로 붙을 때 자주 막히는 두 옵션을 추가한다.
+    # allowPublicKeyRetrieval 없으면: "Public Key Retrieval is not allowed"
+    # useSSL=false 없으면: 자체 서명 인증서 경고
+    url: jdbc:mysql://localhost:3306/${DB_NAME}?connectionTimeZone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
+
+  flyway:
+    # Flyway 9 부터 clean 은 기본 비활성이다. 로컬에서만 푼다.
+    clean-disabled: false
+
+  thymeleaf:
+    # devtools 가 자동으로 꺼주지만 명시해두면 의도가 드러난다.
+    cache: false
+
+server:
+  # 외부에서 접근 못 하게 로컬 루프백에만 바인딩한다.
+  address: 127.0.0.1
+
+logging:
+  level:
+    # 매퍼 패키지를 debug 로 두면 실행 SQL 과 바인딩 파라미터가 찍힌다.
+    # trace 로 올리면 조회 결과 행까지 나온다.
+    com.toyproject.club21century.mapper: debug

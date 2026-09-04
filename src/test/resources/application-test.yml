@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/club21century_test?connectionTimeZone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
+    # .env 에 의존하지 않도록 직접 적는다. CI 에서도 돌아야 하기 때문이다.
+    username: root
+    password: "test1234"
+
+  flyway:
+    enabled: true
+    # 테스트마다 깨끗한 스키마에서 시작하고 싶을 때 푼다.
+    clean-disabled: false
+
+logging:
+  level:
+    com.toyproject.club21century.mapper: debug
