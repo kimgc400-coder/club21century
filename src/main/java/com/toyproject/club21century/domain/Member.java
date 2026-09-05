@@ -20,4 +20,16 @@ public class Member {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private LocalDateTime deletedAt;
+
+    public static Member signup(String loginId, String encodedPassword, String email, LocalDateTime now) {
+        Member member = new Member();
+        member.loginId = loginId;
+        member.password = encodedPassword;
+        member.email = email;
+        member.status = MemberStatus.ACTIVE;
+        member.createdAt = now;
+        member.deletedAt = null;
+        member.modifiedAt = now;
+        return member;
+    }
 }

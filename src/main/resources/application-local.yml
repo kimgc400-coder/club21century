@@ -1,4 +1,8 @@
 spring:
+  web:
+    error:
+      include-stacktrace:
+        #이것을 설정하면 devtools를 사용해요 스택트레이스가 나가지 않는다.
   datasource:
     # 로컬 MySQL 8 에 root 로 붙을 때 자주 막히는 두 옵션을 추가한다.
     # allowPublicKeyRetrieval 없으면: "Public Key Retrieval is not allowed"
@@ -16,6 +20,7 @@ spring:
 server:
   # 외부에서 접근 못 하게 로컬 루프백에만 바인딩한다.
   address: 127.0.0.1
+   # DevTools 기본값(always)을 되돌린다
 
 logging:
   level:
