@@ -1,0 +1,39 @@
+### 회원가입 성공
+POST http://localhost:8080/api/members/signup
+Content-Type: application/json
+
+{
+  "loginId": "hong",
+  "password": "password1234",
+  "email": "hong@example.com"
+}
+
+### 중복 아이디 - 위 요청과 같은 loginId
+POST http://localhost:8080/api/members/signup
+Content-Type: application/json
+
+{
+  "loginId": "hong",
+  "password": "anotherpass123",
+  "email": "another@example.com"
+}
+
+### 검증 실패 - 비밀번호가 8자 미만
+POST http://localhost:8080/api/members/signup
+Content-Type: application/json
+
+{
+  "loginId": "kim",
+  "password": "short",
+  "email": "kim@example.com"
+}
+
+### 검증 실패 - 이메일 형식 오류
+POST http://localhost:8080/api/members/signup
+Content-Type: application/json
+
+{
+  "loginId": "park",
+  "password": "password1234",
+  "email": "not-an-email"
+}

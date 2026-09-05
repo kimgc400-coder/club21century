@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public record SignupRequest(
         @NotBlank(message = "아이디는 필수 입니다.")
         @Size(min = 4, max = 50, message= "아이디는 4자이상 50자 이하여야 합니다.")
-        @Pattern(regexp = "^[a-zA-Z0-9_]+$]",
+        @Pattern(regexp = "^[a-zA-Z0-9_]+$",
         message = "아이디는 영문, 숫자, underbar만 사용할 수 있습니다.")
         String loginId,
 
