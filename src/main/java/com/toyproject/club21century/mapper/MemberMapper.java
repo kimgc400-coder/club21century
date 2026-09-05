@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Optional;
+
 @Mapper
 public interface MemberMapper {
 
@@ -20,6 +22,11 @@ public interface MemberMapper {
             """)
     @Options(useGeneratedKeys = true, keyProperty = "memberId")
     void insert(Member member);
+
+    @Select("""
+            SELECT * FROM member WHERE member_id = #{memberId} AND status <> 'WITHDRAWN'
+            """)
+    Optional<Member> findById(Long memberId);
 
 }
 
