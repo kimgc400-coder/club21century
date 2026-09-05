@@ -2,6 +2,8 @@ package com.toyproject.club21century.service;
 
 import com.toyproject.club21century.domain.Member;
 import com.toyproject.club21century.dto.SignupRequest;
+import com.toyproject.club21century.exception.BusinessException;
+import com.toyproject.club21century.exception.ErrorCode;
 import com.toyproject.club21century.mapper.MemberMapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +35,7 @@ public class MemberService {
         try {
             memberMapper.insert(member);
         } catch (DuplicateKeyException e) {//경합 문제에서의 최후의 보루를 DB에서 막는다.
-            throw new IllegalStateException("이미 사용 중인 아이디 또는 이메일입니다.");
+            throw new BusinessException(ErrorCode.DUPLICATE_MEMBER, e);
         }
         return member.getMemberId();
     }
