@@ -3,6 +3,7 @@ package com.toyproject.club21century.mapper;
 import com.toyproject.club21century.domain.Member;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -15,8 +16,15 @@ public interface MemberMapper {
     Member findByLoginId(String loginId);
 
     @Insert("""
-            INSERT INTO member (login_id, password, email, status, created_at, modified_at) VALUES ('test1', 'dummy', 'test1@example.com','ACTIVE',NOW(), NOW())
+            INSERT INTO member (login_id, password, email, status, created_at, modified_at) VALUES (#{loginId}, #{password}, #{email}, #{status}, #{createdAt}, #{modifiedAt})
             """)
-    void insertForTest();
+    @Options(useGeneratedKeys = true, keyProperty = "memberId")
+    void insert(Member member);
 
 }
+
+/*
+ * @Options(useGeneratedKeys = true, keyProperty = "memberId")
+ * INSERT 후 MySql이 생성한 auto_increment 값을 member.memberId에 되돌려 넣는다.
+ * 이게 없으면 방금 만든 회원 ID를 모른다.
+ */
