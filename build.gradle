@@ -30,20 +30,20 @@ dependencies {
 
     // --- JWT (Initializr에 없어서 수동) ---
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
-    runtimeOnly   'io.jsonwebtoken:jjwt-impl:0.12.6'
-    runtimeOnly   'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 
     // --- 영속성 ---
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:4.0.1'
-    runtimeOnly   'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
     // --- 스키마 마이그레이션 ---
     implementation 'org.springframework.boot:spring-boot-starter-flyway'
     implementation 'org.flywaydb:flyway-mysql'
 
     // --- 개발 편의 ---
-    developmentOnly    'org.springframework.boot:spring-boot-devtools'
-    compileOnly        'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
@@ -54,8 +54,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:4.0.1'
-    testRuntimeOnly    'org.junit.platform:junit-platform-launcher'
-    testCompileOnly        'org.projectlombok:lombok'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
@@ -66,13 +66,13 @@ tasks.named('test') {
     systemProperty 'spring.profiles.active', 'test'
 
     testLogging {
-        events 'failed' //이것또한 실패한 로그만 남기라는 말이다.
+        events 'passed', 'skipped', 'failed' //이것또한 실패한 로그만 남기라는 말이다.
         exceptionFormat = 'full'   // 전체 스택트레이스와 메시지를 콘솔에 출력
         showCauses = true
         showStackTraces = true
         //showStandardStreams = true   // ← 마이바티서의 sql로그는 예외가 아니라 일반로그이다.
-                                       // 애플리케이션의 표준 출력으로 나가는데 gradle이 기본적으로 그걸 가로채서 숨긴다.
-                                       // 평소에는 주석처리하고 필요한 경우에만 켜서 확인한다.
+        // 애플리케이션의 표준 출력으로 나가는데 gradle이 기본적으로 그걸 가로채서 숨긴다.
+        // 평소에는 주석처리하고 필요한 경우에만 켜서 확인한다.
 
     }
 }
