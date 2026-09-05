@@ -1,6 +1,7 @@
 package com.toyproject.club21century.service;
 
 import com.toyproject.club21century.domain.Member;
+import com.toyproject.club21century.dto.MemberResponse;
 import com.toyproject.club21century.dto.SignupRequest;
 import com.toyproject.club21century.exception.BusinessException;
 import com.toyproject.club21century.exception.ErrorCode;
@@ -38,5 +39,11 @@ public class MemberService {
             throw new BusinessException(ErrorCode.DUPLICATE_MEMBER, e);
         }
         return member.getMemberId();
+    }
+
+    public MemberResponse findById(Long memberId) {
+        return memberMapper.findById(memberId)
+                .map(MemberResponse::from)
+                .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
     }
 }
