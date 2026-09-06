@@ -46,4 +46,11 @@ public class MemberService {
                 .map(MemberResponse::from)
                 .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
     }
+
+    @Transactional
+    public void withdraw(Long memberId) {
+        Member member = memberMapper.findById(memberId).orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
+        member.withdraw(LocalDateTime.now());
+        memberMapper.withdraw(member);
+    }
 }
