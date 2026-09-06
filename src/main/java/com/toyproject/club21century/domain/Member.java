@@ -32,4 +32,10 @@ public class Member {
         member.modifiedAt = now;
         return member;
     }
+
+    public void withdraw(LocalDateTime now) {
+        this.status = MemberStatus.WITHDRAWN;
+        this.deletedAt = now;
+        this.modifiedAt = now;
+    }
 }

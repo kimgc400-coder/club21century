@@ -30,4 +30,10 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findById(memberId));
     }
 
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<Void> withdraw(@PathVariable Long memberId) {
+        memberService.withdraw(memberId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
