@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MemberTest {
@@ -33,5 +32,36 @@ public class MemberTest {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.WITHDRAWN);
         assertThat(member.getDeletedAt()).isEqualTo(now);
         assertThat(member.getModifiedAt()).isEqualTo(now);
+    }
+
+    @Test
+    @DisplayName("null인 필드는 바꾸지 않고 modifiedAt만 갱신한다.")
+    void updateIgnoresNull() {
+        LocalDateTime created = LocalDateTime.of(2026, 1, 1, 0, 0);
+        Member member = Member.signup("usinKim", "dummy", "old@example.com", created);
+        member.update(null, "길동이", created);
+
+        LocalDateTime now = LocalDateTime.of(2026, 3, 1, 0, 0);
+        member.update("new@example.com", null, now);
+
+        assertThat(member.getEmail()).isEqualTo("new@example.com");
+        assertThat(member.getNickname()).isEqualTo("길동이");
+        assertThat(member.getModifiedAt()).isEqualTo(now);
+
+    }
+
+    @Test
+    @DisplayName("둘 다 null 이어도 modifiedAt은 갱신된다.")
+    void updateAlwaysTouchesModifiedAt() {
+        LocalDateTime created = LocalDateTime.of(2026, 1, 1, 0, 0);
+        Member member = Member.signup("usinKim", "dummy", "old@example.com", created);
+
+        LocalDateTime now = LocalDateTime.of(2026, 3, 1, 0, 0);
+        member.update(null, null, now);
+
+        assertThat(member.getEmail()).isEqualTo("old@example.com");
+        assertThat(member.getNickname()).isNull();
+        assertThat(member.getModifiedAt()).isEqualTo(now);
+        assertThat(member.getCreatedAt()).isEqualTo(created);
     }
 }

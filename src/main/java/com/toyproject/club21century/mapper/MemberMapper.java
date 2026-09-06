@@ -18,5 +18,7 @@ public interface MemberMapper {
 
     int withdraw(Member member);
 
+    int update(Member member);
+
 }
 
