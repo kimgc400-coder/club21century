@@ -21,7 +21,10 @@ public class SignupRequestTest {
 
     @BeforeAll
     //이것과 BeforEach는 무슨차이인가? 언제 각각 쓰이는지?
-    //
+    //BeforeAll은 해당 테스트 클래스가 실행될 떄 가장 먼저, 딱 한 번만 실행되는 초기화 메서드를 정의하는 JUnit5 어노테이션 -> 반드시 static 메서드여야 한다. / 모든 테스트가 공유하는 무거운 자원 초기화
+    //Validator처럼 상태가 변하지 않는(Stateless) 스레드 세이프한 객체를 초기화할 때만 사용하는 것이 좋은 설계
+
+    //BeforeEach는 각 테스트 메서드가 실행될 때 마다 매번 실행된다. -> 일반 메서드로 작성 / 각 테스트가 서로 영향을 주지 않도록 독립적인 상태/객체 초기화
     static void setUp() {
         factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();

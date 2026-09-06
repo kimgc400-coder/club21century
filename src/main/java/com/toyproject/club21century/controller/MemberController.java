@@ -1,6 +1,7 @@
 package com.toyproject.club21century.controller;
 
 import com.toyproject.club21century.dto.MemberResponse;
+import com.toyproject.club21century.dto.MemberUpdateRequest;
 import com.toyproject.club21century.dto.SignupRequest;
 import com.toyproject.club21century.service.MemberService;
 import jakarta.validation.Valid;
@@ -34,6 +35,14 @@ public class MemberController {
     public ResponseEntity<Void> withdraw(@PathVariable Long memberId) {
         memberService.withdraw(memberId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{memberId}")
+    public ResponseEntity<MemberResponse> update(
+            @PathVariable Long memberId,
+            @Valid @RequestBody MemberUpdateRequest request
+            ) {
+        return ResponseEntity.ok(memberService.update(memberId, request));
     }
 
 }

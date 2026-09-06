@@ -27,9 +27,19 @@
         SET
         status = #{status},
         login_id = CONCAT('deleted_', member_id),
+        nickname = CONCAT('deleted_', member_id),
         email = CONCAT('deleted_',member_id,'@removed.local'),
         password = '',
         deleted_at = #{deletedAt},
+        modified_at = #{modifiedAt}
+        WHERE member_id = #{memberId}
+    </update>
+
+    <update id="update">
+        UPDATE member
+        SET
+        email = #{email},
+        nickname= #{nickname},
         modified_at = #{modifiedAt}
         WHERE member_id = #{memberId}
     </update>
