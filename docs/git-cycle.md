@@ -38,3 +38,8 @@ git branch -d feat/무언가        ← 이름은 `git branch` 로 확인 후 �
 ## 브랜치 이름
 커밋 접두사와 같은 단어 + 슬래시
 예: feat/member-signup, refactor/mybatis-xml
+
+## 주의
+- 브랜치 이름은 `git branch` 로 확인하고 복사한다. 기억에서 꺼내 쓰지 않는다.
+- `git branch -d` 는 머지 확인 후 삭제. `-D` 는 강제라 작업을 날릴 수 있다.
+- 원격 삭제는 머지 직후 GitHub 의 Delete branch 버튼으로 통일한다.
